@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -7,7 +7,7 @@ import {
   Activity, AlertTriangle, TrendingUp, TrendingDown, Download,
   Filter, Map, FileText, Users, Zap, LogIn, Lock, User,
   Shield, LogOut, Eye, EyeOff, Table, Clock, Calendar,
-  ChevronRight, FileSpreadsheet, BarChart3, PieChart3,
+  ChevronRight, FileSpreadsheet, BarChart3,
   AlertCircle
 } from 'lucide-react';
 
@@ -249,7 +249,7 @@ const Demo = () => {
   };
 
   // Get feeders based on selected section
-  const getFilteredFeeders = () => {
+  const getFilteredFeeders = useCallback(() => {
     if (selectedSection === 'all') {
       const filteredSectionIds = getFilteredSections().map(s => s.id);
       const feedersInSections = feederSectionMapping
@@ -264,7 +264,7 @@ const Demo = () => {
       .map(mapping => mapping.feederId);
 
     return feederData.filter(f => feedersInSection.includes(f.id));
-  };
+  }, [selectedRegion, selectedCircle, selectedDivision, selectedSubDivision, selectedSection]);
 
   // Calculate indices based on filters
   const reliabilityIndices = useMemo(() => {
