@@ -264,7 +264,7 @@ const Demo = () => {
       .map(mapping => mapping.feederId);
 
     return feederData.filter(f => feedersInSection.includes(f.id));
-  }, [selectedRegion, selectedCircle, selectedDivision, selectedSubDivision, selectedSection, feederData, feederSectionMapping, getFilteredSections]);
+  }, [selectedSection, feederData, feederSectionMapping, getFilteredSections]);
 
   // Calculate indices based on filters
   const reliabilityIndices = useMemo(() => {
@@ -285,7 +285,7 @@ const Demo = () => {
       maifi: (weightedSaifi * 0.55).toFixed(2), // Estimated
       caifi: (weightedSaifi * 0.32).toFixed(2)  // Estimated
     };
-  }, [selectedRegion, selectedCircle, selectedDivision, selectedSubDivision, selectedSection, getFilteredFeeders]);
+  }, [getFilteredFeeders]);
 
   // Interruption data with dates
   const interruptionData = [
